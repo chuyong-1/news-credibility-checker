@@ -1,3 +1,8 @@
+🚀 **Live Demo:** https://news-credibility-checker-cui3v6kbscbwguasdvektn.streamlit.app/
+
+
+🔗 **GitHub Repo:** https://github.com/chuyong-1/news-credibility-checker
+
 ## 📸 Screenshots
 
 ### Home Screen
