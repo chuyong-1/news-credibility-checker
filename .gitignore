@@ -1,3 +1,16 @@
-venv/
+# Python
 __pycache__/
-data/
+*.pyc
+
+# Virtual environment
+venv/
+.env/
+
+# Model files
+model/*.pkl
+
+# Streamlit
+.streamlit/
+
+# OS files
+.DS_Store
