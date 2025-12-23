@@ -28,7 +28,7 @@ The system not only predicts whether news is *Real or Fake*, but also **explains
    - Real vs Fake probabilities  
 6. **LIME** explains which words influenced the decision  
 
-⚠️ This tool provides AI-assisted credibility analysis and does not replace human fact-checking.
+⚠️ This tool provides **AI-assisted credibility analysis** and does not replace human fact-checking.
 
 ---
 
@@ -71,7 +71,7 @@ The model is trained using a **train-test split** and evaluated using:
 - Recall  
 - F1-score  
 
-This ensures the model generalizes well to unseen data.
+This ensures the model generalizes well to unseen news articles.
 
 ---
 
@@ -83,27 +83,21 @@ Examples:
 - 🟢 *official*, *confirmed*, *report* → pushes towards **Real**
 - 🔴 *shocking*, *you won’t believe*, *secret* → pushes towards **Fake**
 
-This improves transparency, trust, and usability.
+This improves **transparency, trust, and usability**.
+
 ---
+
 ## 🖥️ How to Run Locally
+
 ### 1️⃣ Clone the repository
 ```bash
 git clone https://github.com/chuyong-1/news-credibility-checker.git
 cd news-credibility-checker
-
-2️⃣ Create and activate a virtual environment
 python -m venv venv
-Windows
 venv\Scripts\activate
-Mac / Linux
 source venv/bin/activate
-
-3️⃣ Install dependencies
 pip install -r requirements.txt
-
-4️⃣ Run the application
 streamlit run app.py
-'''
 
 ## 📸 Screenshots
 
@@ -120,3 +114,55 @@ streamlit run app.py
 
 ### 🧠 Explainable AI – Fake News
 ![Fake News Explainability](screenshots/f_explainability_view.png)
+
+⚠️ Limitations
+
+Text-only analysis (no images or videos)
+
+Dataset bias may affect predictions
+
+No real-time fact-checking against live sources
+
+Predictions should be used as supporting signals only
+
+🌱 Future Improvements
+
+Transformer-based models (BERT / DistilBERT)
+
+Source credibility scoring using URLs
+
+Chrome browser extension
+
+Multilingual support
+
+Blockchain-backed credibility verification
+
+👨‍💻 Author
+
+Chuyong
+Computer Science (AI & ML)
+Interested in AI, Machine Learning, and trustworthy information systems
+
+📄 License
+
+This project is licensed under the MIT License.
+
+⭐ Support
+
+If you find this project useful, feel free to ⭐ star the repository.
+Feedback and suggestions are welcome!
+
+
+---
+
+## ✅ FINAL STEP (VERY IMPORTANT)
+
+After pasting and saving:
+
+```bash
+git add README.md
+git commit -m "Finalize README with proper formatting and screenshots"
+git push origin main
+
+
+Then refresh GitHub (Ctrl + Shift + R).
