@@ -1,6 +1,7 @@
 import streamlit as st
 import joblib
 import numpy as np
+from lime.lime_text import LimeTextExplainer
 
 # ----------------------------------
 # Page Configuration
@@ -19,9 +20,10 @@ st.title("📰 AI News Credibility Checker")
 st.markdown(
     """
     **How it works**
-    - Uses a machine learning model trained on real and fake news articles  
-    - Analyzes language patterns using NLP  
-    - Returns a probability-based credibility score  
+    - Uses a machine learning model trained on real and fake news  
+    - Applies NLP techniques (TF-IDF + Logistic Regression)  
+    - Returns probability-based credibility scores  
+    - Explains *why* the prediction was made using Explainable AI (LIME)
 
     ⚠️ *This tool assists credibility assessment and does not replace human fact-checking.*
     """
@@ -39,6 +41,16 @@ def load_model():
 model, vectorizer = load_model()
 
 # ----------------------------------
+# LIME Explainer
+# ----------------------------------
+class_names = ["Real", "Fake"]
+explainer = LimeTextExplainer(class_names=class_names)
+
+def predict_proba_text(texts):
+    vec = vectorizer.transform(texts)
+    return model.predict_proba(vec)
+
+# ----------------------------------
 # User Input
 # ----------------------------------
 news = st.text_area(
@@ -48,7 +60,7 @@ news = st.text_area(
 )
 
 # ----------------------------------
-# Prediction Logic
+# Prediction + Explainability
 # ----------------------------------
 if st.button("🔍 Check Credibility"):
     if news.strip() == "":
@@ -64,23 +76,58 @@ if st.button("🔍 Check Credibility"):
         credibility_score = round(real_prob, 2)
 
         # ----------------------------------
-        # Results
+        # Main Result
         # ----------------------------------
-        st.subheader("📊 Credibility Analysis")
+        st.subheader(f"📊 Credibility Score: {credibility_score}%")
         st.progress(credibility_score / 100)
 
         if credibility_score >= 75:
-            st.success(f"✅ Likely Real News ({credibility_score}%)")
+            st.success(f"✅ Likely Real News")
         elif credibility_score >= 45:
-            st.warning(f"⚠️ Uncertain Credibility ({credibility_score}%)")
+            st.warning(f"⚠️ Uncertain Credibility")
         else:
-            st.error(f"❌ Likely Fake News ({credibility_score}%)")
+            st.error(f"❌ Likely Fake News")
 
-        # Extra details
-        with st.expander("📌 See detailed probabilities"):
-            st.write(f"**Real News Probability:** {round(real_prob, 2)}%")
-            st.write(f"**Fake News Probability:** {round(fake_prob, 2)}%")
+        # ----------------------------------
+        # Percentage Breakdown
+        # ----------------------------------
+        st.subheader("📈 Credibility Breakdown")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.metric(
+                label="🟢 Real News Probability",
+                value=f"{real_prob:.2f}%"
+            )
+
+        with col2:
+            st.metric(
+                label="🔴 Fake News Probability",
+                value=f"{fake_prob:.2f}%"
+            )
+
+        # ----------------------------------
+        # Explainability (LIME)
+        # ----------------------------------
+        st.subheader("🧠 Why did the model decide this?")
+
+        with st.spinner("Generating explanation..."):
+            explanation = explainer.explain_instance(
+                news,
+                predict_proba_text,
+                num_features=10
+            )
+
+        exp_list = explanation.as_list()
+
+        st.markdown("**Top influencing words:**")
+        for word, weight in exp_list:
+            if weight > 0:
+                st.markdown(f"🟢 **{word}** → pushes towards *Real*")
+            else:
+                st.markdown(f"🔴 **{word}** → pushes towards *Fake*")
 
         st.caption(
-            "⚠️ This prediction is AI-generated and should be used as a supporting signal only."
+            "LIME highlights influential words based on local approximations of the model."
         )
