@@ -98,7 +98,7 @@ venv\Scripts\activate
 source venv/bin/activate
 pip install -r requirements.txt
 streamlit run app.py
-
+```
 ## 📸 Screenshots
 
 ### ✅ Real News Prediction
