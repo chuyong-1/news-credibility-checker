@@ -108,11 +108,14 @@ streamlit run app.py
 
 ### ✅ Real News Prediction
 ![Real News Example](screenshots/real_news_example.png)
-### 🧠 Explainable AI (LIME)
-![Explainability View](screenshots/t_explainability_view.png)
+
+### 🧠 Explainable AI – Real News
+![Real News Explainability](screenshots/r_explainability_view.png)
+
+---
 
 ### ❌ Fake News Prediction
 ![Fake News Example](screenshots/fake_news_example.png)
 
-### 🧠 Explainable AI (LIME)
-![Explainability View](screenshots/f_explainability_view.png)
+### 🧠 Explainable AI – Fake News
+![Fake News Explainability](screenshots/f_explainability_view.png)
