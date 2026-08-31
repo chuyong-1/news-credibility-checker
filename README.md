@@ -1,6 +1,6 @@
 # 🛰️ Verity Intelligence Command
 **AI-Powered OSINT & Disinformation Intelligence Platform**
-
+akansha is here
 Verity Intelligence Command is a multimodal Open Source Intelligence (OSINT) platform designed to detect, analyze, and map coordinated disinformation campaigns. By combining NLP, image forensics, relational intelligence, and active learning pipelines, Verity serves as a powerful decision-support system for analysts, researchers, cybersecurity teams, and misinformation investigators.
 
 > ⚠️ **Disclaimer:** Verity provides probabilistic intelligence assessments and forensic indicators. It is designed to assist and accelerate investigations, not to replace human verification or serve as the sole authority for factual accuracy.
